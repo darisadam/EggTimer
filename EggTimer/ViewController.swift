@@ -10,22 +10,21 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let softTime = 5
-    let mediumTime = 8
-    let hardTime = 12
+    var eggTime: [String: Int] = ["Soft":300, "Medium":420, "Hard":720]
     
     @IBAction func eggButton(_ sender: UIButton) {
         let hardness = sender.currentTitle!
         
-        switch hardness {
-        case "Soft":
-            print(softTime)
-        case "Medium":
-            print(mediumTime)
-        default:
-            print(hardTime)
+        var secondsRemaining = eggTime[hardness]!
+        
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (Timer) in
+            if secondsRemaining > 0 {
+                print("\(secondsRemaining) seconds left")
+                secondsRemaining -= 1
+            } else {
+                Timer.invalidate()
+            }
         }
     }
-    
     
 }
